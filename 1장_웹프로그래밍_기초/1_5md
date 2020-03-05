@@ -1,0 +1,74 @@
+5.3 Servlet 라이프 사이클
+~~~
+Life Cycle
+
+	- 객체의 생성부터 소멸까지의 과정
+
+객체생성자()
+
+	- 제일 초기에 한번 생성
+
+init(ServletConfig config)
+
+	- 생성자 생성 후 초기에 한번 생성
+
+service(request, response)
+
+	- 요청을 받을 시 수행
+
+	- HttpServlet에 service 메소드는 템플릿 메소드 패턴으로 구현되어있다.
+
+	- GET이면 doGet(request, response) 메소드 호출
+
+	- POST면 doPost(request, response) 메소드 호출
+
+destroy()
+
+		- 수정 / 종료 시에 호출
+
+if(update || end)
+	destroy()
+	return;
+if(Not in Memory)
+	constructor()
+	init()
+service();
+
+템플릿 메소드 패턴 :
+
+	- abstract가 붙은 것은 무조건 구현
+
+	- abstract가 없는 것은 선택적 overide(훅 메소드)
+~~~
+5.4 Request, Response 객체 이해하기
+~~~
+WAS는 클라이언트에게 요청을 Servlet요청을 받으면
+
+	- HttpServletRequest객체를 생성해 요청 정보를 저장
+
+	- HttpServletResponse객체를 생성하고 응답때 보낼 정보를 저장할 수 있음.
+
+HttpServletRequest :
+
+	- 헤더정보, 파라미터, 쿠키, URI, URL 등의 정보를 갖고 있음
+
+	- Body의 Stream을 읽을 수 있음
+
+HttpServletResponse :
+
+	- WAS는 어떤 클라이언트가 요청을 보냈는지 알고 있기 때문에 해당 클라이언트에게 보내기 위한 HttpServletResponse를 만들어 서블릿에게 전달해줌.
+
+	- content-type, response code 등을 전달
+
+Http 헤더 정보 :
+
+	- Connection (Keep-alive / close)
+
+	- Proxy-Authenticate 프록시 관련헤더는 프록시를 중간에 둔 경우
+
+	- Proxy-Authorization
+
+	- TE (HTTP 2.0)
+
+	- Transfer-Encoding
+~~~
